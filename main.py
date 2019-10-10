@@ -5,7 +5,6 @@ class Board:
     def __init__(self, size):
         self.size = size
         self.board = {}
-        self.foundWords = ["valentino", "kaj", "baja", "šala", "krava", "lava", "boja"]
         self.test = []
         self.shuffleBoard()
     
@@ -29,9 +28,6 @@ class Board:
         used += (currentLetter,)
         currentWord += self.board[currentLetter[0], currentLetter[1]]
         self.test.append(currentWord)
-        
-        if currentWord == "tino":
-            print("ima tino pog")
         
         corners = self.getCorners(currentLetter)
         cornerUp = corners[0]
