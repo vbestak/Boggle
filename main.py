@@ -1,15 +1,17 @@
 import random
 import time
+import words_manager
 
 class Board:
     def __init__(self, size):
         self.size = size
         self.board = {}
         self.test = []
+        self.words = words_manager.Words()
         self.shuffleBoard()
     
     def shuffleBoard(self):
-        abc = "abcčćdđefghijklmnoprsštuvzž"
+        abc = "abcdefghijklmnopqrstuvwxyz"
         random.seed(time.time())
         
         #preradi tako da oko 40% slova budu samoglasnici
@@ -27,7 +29,13 @@ class Board:
     def __findWords(self, currentLetter = [0, 0], used = (), currentWord = ""):
         used += (currentLetter,)
         currentWord += self.board[currentLetter[0], currentLetter[1]]
-        self.test.append(currentWord)
+        
+        matches = self.words.findMatches(currentWord)
+        
+        if matches == 0:
+            return ""
+        elif matches == 1:
+            self.test.append(currentWord)
         
         corners = self.getCorners(currentLetter)
         cornerUp = corners[0]
@@ -38,14 +46,10 @@ class Board:
             for j in range(cornerUp[1], cornerDown[1] + 1):
                 if [i, j] in used:
                     continue
-                #print(i, end=" ")
-                #print(j, end=" ")
-                #print(self.board[i, j])
                 
                 if len(currentWord) == self.size*2:
                     return
                 
-                #print(currentWord)
                 self.__findWords([i, j], used, currentWord)
                 
     def getCorners(self, letter:[2]):
@@ -66,6 +70,9 @@ class Board:
             
         return [cornerUp, cornerDown]
     
+    def allWords(self):
+        print(self.test)
+    
     def drawBoard(self):
         print("")
         for i in range(self.size):
@@ -76,6 +83,8 @@ class Board:
                 print(self.board[i, j], end = ' ')
 
 
-b = Board(5)
+b = Board(4)
 b.drawBoard()
+
+b.allWords()
 
