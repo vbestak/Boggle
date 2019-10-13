@@ -29,13 +29,16 @@ class Board:
     def __findWords(self, currentLetter = [0, 0], used = (), currentWord = ""):
         used += (currentLetter,)
         currentWord += self.board[currentLetter[0], currentLetter[1]]
+        minWordLen = 3 
         
-        matches = self.words.findMatches(currentWord)
+        if len(currentWord) >= minWordLen:
+            matches = self.words.findMatches(currentWord)
+            
+            if matches == 0:
+                return ""
+            elif matches == 1:
+                self.test.append(currentWord)
         
-        if matches == 0:
-            return ""
-        elif matches == 1:
-            self.test.append(currentWord)
         
         corners = self.getCorners(currentLetter)
         cornerUp = corners[0]
@@ -71,7 +74,7 @@ class Board:
         return [cornerUp, cornerDown]
     
     def allWords(self):
-        print(self.test)
+        print(self.test[:])
     
     def drawBoard(self):
         print("")
@@ -83,8 +86,9 @@ class Board:
                 print(self.board[i, j], end = ' ')
 
 
-b = Board(4)
+b = Board(15)
 b.drawBoard()
 
+print("\n")
 b.allWords()
 
