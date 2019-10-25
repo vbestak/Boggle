@@ -1,6 +1,8 @@
 import random
 import time
+
 import words_manager
+
 
 class Board:
     def __init__(self, size):
@@ -73,7 +75,7 @@ class Board:
             
         return [cornerUp, cornerDown]
     
-    def allWords(self):
+    def printAllWords(self):
         print(self.test[:])
     
     def drawBoard(self):
@@ -84,11 +86,3 @@ class Board:
             
             for j in range(self.size):
                 print(self.board[i, j], end = ' ')
-
-
-b = Board(15)
-b.drawBoard()
-
-print("\n")
-b.allWords()
-

@@ -31,6 +31,3 @@ class Words:
                 return 2
         
         return 0
-
-# b = Words()
-# print(b.words)
