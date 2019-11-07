@@ -1,5 +1,5 @@
 import tkinter
-import main
+import board
 
 class FrameManager:
     def __init__(self):
@@ -28,15 +28,15 @@ class MenuFrame:
             self.frame.columnconfigure(i,weight=1)
             self.frame.rowconfigure(i, weight=1)
 
-        titleLabel = tkinter.Label(self.frame, text="Boggle").grid(row=1, column=3)
-        startButton = tkinter.Button(self.frame, text ="New game", command=lambda:self.frameMng.switch_frame(GameFrame), width=25).grid(row=3, column=3, columnspan=1)
-        exitButton = tkinter.Button(self.frame, text ="Exit", command=exit, width=25).grid(row=4, column=3, columnspan=1)
+        titleLabel = tkinter.Label(self.frame, fg="black", text="Boggle").grid(row=1, column=3)
+        startButton = tkinter.Button(self.frame, background="orange2", text ="New game", command=lambda:self.frameMng.switch_frame(GameFrame), width=25).grid(row=3, column=3, columnspan=1)
+        exitButton = tkinter.Button(self.frame, background="burlywood1", text ="Exit", command=exit, width=25).grid(row=4, column=3, columnspan=1)
 
 class GameFrame:
     def __init__(self, frameMng:FrameManager):
         self.frame = tkinter.Frame(frameMng.root, highlightbackground="red", highlightthickness=1)
         self.frameMng = frameMng
-        self.board = main.Board(4)
+        self.board = board.Board(4)
         self.board.printAllWords()
         self.label = []
         self.score = 0
@@ -56,13 +56,11 @@ class GameFrame:
         self.timerLabel = tkinter.Label(self.frame, text="Timer: %02d:%02d" % (self.timer["min"], self.timer["sec"]) )
         self.timerLabel.after(1000, self.refreshTimer)
 
-
         self.wordsInput = tkinter.Entry(self.frame, width=65)
         self.wordsInput.bind("<Return>", lambda e:self.checkGuessedWord())
 
         self.scoreLabel.grid(row=0, column=0)
         self.timerLabel.grid(row=0, column=11)
-
         self.wordsInput.grid(row=10, column=0, columnspan=12)
 
     def refreshTimer(self):
@@ -95,7 +93,3 @@ class GameFrame:
     
             self.scoreLabel["text"] = "Score: %03d" % self.score
             self.wordsInput.delete(0, tkinter.END)
-            
-        
-
-frameManager = FrameManager()
