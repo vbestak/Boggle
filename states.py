@@ -21,7 +21,7 @@ class FrameManager:
 
 class MenuFrame:
     def __init__(self, frameMng:FrameManager):
-        self.frame = tkinter.Frame(frameMng.root, highlightbackground="red", highlightthickness=1)
+        self.frame = tkinter.Frame(frameMng.root, highlightbackground="orange2", highlightthickness=10)
         self.frameMng = frameMng
         
         for i in range(7):
@@ -34,7 +34,7 @@ class MenuFrame:
 
 class GameFrame:
     def __init__(self, frameMng:FrameManager):
-        self.frame = tkinter.Frame(frameMng.root, highlightbackground="red", highlightthickness=1)
+        self.frame = tkinter.Frame(frameMng.root, highlightbackground="orange2", highlightthickness=10)
         self.frameMng = frameMng
         self.board = board.Board(4)
         self.board.printAllWords()
